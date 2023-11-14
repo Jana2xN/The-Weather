@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         getWeatherData(city)
             .then(data => {
                 // Display the weather data
-                weatherResult.innerHTML = generateWeatherHTML(data);
+                generateWeatherHTML(data);
                 weatherResult.classList.remove("hidden");
             })
             .catch(error => {
@@ -31,18 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
     
         return response.json();
     }
-    
-    getWeatherData(city)
-        .then(data => {
-            // Display the weather data
-            weatherResult.innerHTML = generateWeatherHTML(data);
-            weatherResult.classList.remove("hidden");
-        })
-        .catch(error => {
-            weatherResult.textContent = `Error: ${error.message}`;
-            weatherResult.classList.remove("hidden");
-        });
-    
 
     function generateWeatherHTML(data) {
         const forecast = data.list;
