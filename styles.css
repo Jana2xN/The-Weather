@@ -5,19 +5,26 @@ body {
     font-size: 16px;
 }
 
-img {
+.background-image {
+    position: relative;
     width: 100%;
-    height: auto;
+    height: 100vh;
+    background: url('images/gradient.jpg') center/cover no-repeat;
 }
 
 .container {
-    max-width: 600px;
-    margin: 50px auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
     padding: 20px;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
+
 
 form {
     display: flex;
