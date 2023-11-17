@@ -56,22 +56,29 @@ document.addEventListener("DOMContentLoaded", function () {
         const tempElement = createHTMLElement('p', 'temperature', `${temperature}°C`);
         const descriptionElement = createHTMLElement('p', 'description', description);
     
+        // Create a div for content
+        const contentDiv = document.createElement('div');
+        contentDiv.classList.add('weather-content');
+    
+        [dateElement, tempElement, descriptionElement].forEach(element => {
+            contentDiv.appendChild(element);
+        });
+    
+        cardElement.appendChild(contentDiv); // Append the content div to the card
+    
         const iconElement = document.createElement('img');
         iconElement.classList.add('weather-icon');
         iconElement.src = getWeatherIcon(description);
-
-
-     // Set width and height for the icon
+    
+        // Set width and height for the icon
         iconElement.style.width = '50px'; // Adjust this value according to your preference
         iconElement.style.height = '50px'; // Adjust this value according to your preference
-
     
-        [dateElement, tempElement, descriptionElement, iconElement].forEach(element => {
-            cardElement.appendChild(element);
-        });
+        cardElement.appendChild(iconElement); // Append the icon after the content div
     
         return cardElement;
     }
+    
     
     function getWeatherIcon(description) {
         const iconPath = 'images/';
@@ -197,11 +204,12 @@ document.addEventListener("DOMContentLoaded", function () {
             iconFile = 'very heavy rain.png';
         } else if (description.includes('volcanic ash')) {
             iconFile = 'volcanic ash.png';
+        } else if (description.includes('overcast clouds')) {
+            iconFile = 'overcast clouds.png';
         } else {
         // Default icon if description doesn't match
         iconFile = 'unknown.png';
-    }
-    
+        }
         // Depending on the time of day, choose the appropriate icon folder
         const timeOfDay = isDayTime() ? 'Day/' : 'Night/';
         return iconPath + timeOfDay + iconFile;
