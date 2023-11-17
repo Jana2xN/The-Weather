@@ -56,11 +56,11 @@ document.addEventListener("DOMContentLoaded", function () {
     
             const tempElement = document.createElement('p');
             tempElement.classList.add('temperature'); // Add class for temperature
-            tempElement.textContent = `Temperature: ${temperature}°C`;
+            tempElement.textContent = `${temperature}°C`;
     
             const descriptionElement = document.createElement('p');
             descriptionElement.classList.add('description'); // Add class for description
-            descriptionElement.textContent = `Description: ${description}`;
+            descriptionElement.textContent = `${description}`;
     
             // Append elements to the card
             cardElement.appendChild(dateElement);
