@@ -3,23 +3,24 @@ body {
     margin: 0;
     padding: 0;
     font-size: 16px;
-    background: rgb(4,119,167);
     background: linear-gradient(90deg, rgba(4,119,167,1) 0%, rgba(166,255,172,1) 100%);
-    height: 100vh;
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: flex-start; /* Align items to the top */
+    min-height: 100vh;
+    padding-top: 10px;
+    box-sizing: border-box; /* Ensure padding doesn't affect overall height */
 }
 
 .container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%; /* Adjusted width for mobile */
-    max-width: 600px; /* Maximum width */
+    width: 85%;
+    max-width: 600px;
     height: auto;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px; /* Space between container and bottom of the page */
 }
 
 .weather-card {
@@ -55,17 +56,19 @@ body {
 form {
     display: flex;
     flex-direction: column; /* Stack input and button in mobile */
-    align-items: center; /* Center items */
+    align-items: flex-start; /* Align items to the left */
     margin-bottom: 20px;
 }
 
 input {
-    width: 440px; 
+    width: calc(100% - 20px); /* Adjust the width to fit properly within the container */
+    max-width: 490px; /* Limit maximum width */
     padding: 10px;
     font-size: 16px;
     border-radius: 5px;
     border: none;
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
+    box-sizing: border-box; /* Include padding and border in the width calculation */
 }
 
 button {
@@ -90,10 +93,12 @@ button:hover {
 @media only screen and (min-width: 600px) {
     body {
         font-size: 18px;
+        align-items: center; /* Align items to the center for desktop */
     }
 
     .container {
-        width: 600px; 
+        width: 600px; /* Width for desktop */
+        margin-bottom: 50px; /* Space between container and bottom of the page for desktop */
     }
 
     form {
@@ -102,6 +107,7 @@ button:hover {
     }
 
     input {
+        width: 440px; /* Width for desktop */
         margin-bottom: 0; 
         margin-right: 10px; 
     }
