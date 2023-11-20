@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
     const weatherForm = document.getElementById("weatherForm");
     const cityInput = document.getElementById("cityInput");
     const weatherResult = document.getElementById("weatherResult");
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     async function getWeatherData(city) {
-        const apiKey = 'ed2b967e9fc91f60717efeeb95b6a75e'; // API key
+        const apiKey = 'ed2b967e9fc91f60717efeeb95b6a75e';
         const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
     
         const response = await fetch(url);
@@ -49,34 +49,29 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function createWeatherCard(date, temperature, description) {
-        const cardElement = document.createElement('div');
-        cardElement.classList.add('weather-card');
-    
+        const cardElement = createHTMLElement('div', 'weather-card');
+        const contentDiv = createHTMLElement('div', 'weather-content');
         const dateElement = createHTMLElement('p', 'date', date.toDateString());
         const tempElement = createHTMLElement('p', 'temperature', `${temperature}°C`);
         const descriptionElement = createHTMLElement('p', 'description', description);
-    
-        // Create a div for content
-        const contentDiv = document.createElement('div');
-        contentDiv.classList.add('weather-content');
     
         [dateElement, tempElement, descriptionElement].forEach(element => {
             contentDiv.appendChild(element);
         });
     
-        cardElement.appendChild(contentDiv); // Append the content div to the card
-    
-        const iconElement = document.createElement('img');
-        iconElement.classList.add('weather-icon');
-        iconElement.src = getWeatherIcon(description);
-    
-        // Set width and height for the icon
-        iconElement.style.width = '50px'; // Adjust this value according to your preference
-        iconElement.style.height = '50px'; // Adjust this value according to your preference
-    
-        cardElement.appendChild(iconElement); // Append the icon after the content div
+        cardElement.appendChild(contentDiv);
+        const iconElement = createWeatherIconElement(description);
+        cardElement.appendChild(iconElement);
     
         return cardElement;
+    }
+
+    function createWeatherIconElement(description) {
+        const iconElement = createHTMLElement('img', 'weather-icon');
+        iconElement.src = getWeatherIcon(description);
+        iconElement.style.width = '50px';
+        iconElement.style.height = '50px';
+        return iconElement;
     }
     
     
@@ -220,11 +215,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const hours = now.getHours();
         return hours > 6 && hours < 20; // Assuming day time is between 6 AM to 8 PM
     }
-    
+
     function createHTMLElement(tag, className, text) {
         const element = document.createElement(tag);
         element.classList.add(className);
-        element.textContent = text;
+        if (text) {
+            element.textContent = text;
+        }
         return element;
     }
 
